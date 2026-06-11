@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users');
             $table->string('title');
             $table->text('content');
+            $table->string('image')->nullable();
             $table->integer('priority')->default(1);
             $table->tinyInteger('status')->default(1);
             $table->date('date_posted');

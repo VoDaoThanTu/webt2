@@ -15,6 +15,7 @@ class Article extends Model
     protected $fillable = [
         'title',
         'content',
+        'image',
         'priority',
         'status',
         'date_posted',
@@ -37,5 +38,10 @@ class Article extends Model
     public function comments()
     {
         return $this->hasMany(Comment::class, 'article_id');
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'article_tag', 'article_id', 'tag_id');
     }
 }

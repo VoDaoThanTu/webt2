@@ -12,7 +12,7 @@ class FavoriteController extends Controller
 {
     public function index()
     {
-        $favorites = Favorite::with(['user', 'article'])->get();
+        $favorites = Favorite::with(['user', 'articles'])->get();
         return view('favorites.index', ['favorites' => $favorites]);
     }
 

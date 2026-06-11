@@ -1,7 +1,6 @@
 @extends('layouts.master')
 
 <style>
-    /* Khung hộp Form xanh đen đồng bộ phẳng lì */
     .form-box {
         background-color: #1E2640;
         border: 1px solid #2D3748;
@@ -35,7 +34,6 @@
         font-size: 14px;
     }
 
-    /* Ô nhập liệu tối chống ẩn chữ */
     .form-group input, .form-group select {
         width: 100%;
         padding: 12px;
@@ -51,7 +49,6 @@
         outline: none;
     }
 
-    /* Nút Tạo tài khoản màu Cyan phẳng */
     .btn-submit {
         background-color: #00F0FF;
         color: #121824;
@@ -66,7 +63,6 @@
         background-color: #00D8E6;
     }
 
-    /* Nút quay lại */
     .btn-back {
         background-color: transparent;
         color: #94A3B8;
@@ -86,6 +82,7 @@
 @section('content')
     <div class="form-box">
         <h3>Tạo thành viên mới</h3>
+        <p style="color: #64748B; font-size: 13px; margin-top: -15px; margin-bottom: 20px; font-style: italic;">* Lưu ý mật khẩu khởi tạo mặc định là: <strong>123456</strong></p>
 
         <form action="{{ url('/users') }}" method="POST">
             @csrf
@@ -107,19 +104,11 @@
             </div>
 
             <div class="form-group">
-                <label for="password">Mật khẩu khởi tạo</label>
-                <input type="password" id="password" name="password" required>
-                @error('password')
-                <small class="text-danger fw-bold" style="display: block; margin-top: 5px;">{{ $message }}</small>
-                @enderror
-            </div>
-
-            <div class="form-group">
                 <label for="role">Vai trò hệ thống</label>
                 <select id="role" name="role" required>
-                    <option value="reader">Độc giả (Reader)</option>
-                    <option value="author">Tác giả (Author)</option>
-                    <option value="admin">Quản trị viên (Admin)</option>
+                    @foreach($roles as $key => $value)
+                        <option value="{{ $key }}" {{ old('role') == $key ? 'selected' : '' }}>{{ $value }}</option>
+                    @endforeach
                 </select>
             </div>
 

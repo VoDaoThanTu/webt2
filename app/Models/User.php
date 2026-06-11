@@ -40,4 +40,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(Viewhistory::class, 'user_id');
     }
+
+    public function favoriteArticles()
+    {
+        return $this->belongsToMany(Article::class, 'favorites', 'user_id', 'article_id')
+            ->withPivot('staydate')
+            ->withTimestamps();
+    }
 }

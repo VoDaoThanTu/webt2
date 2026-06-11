@@ -5,12 +5,15 @@
 
 <body>
 
-@include('layouts.sidebar')
+@if(request()->is('author*'))
+    @include('layouts.sidebar_author')
+@else
+    @include('layouts.sidebar_admin')
+@endif
 
-<div class="content-wrapper">
+<div class="main-content">
     @yield('content')
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

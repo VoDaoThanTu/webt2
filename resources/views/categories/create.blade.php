@@ -1,7 +1,6 @@
 @extends('layouts.master')
 
 <style>
-    /* Khung hộp Form xanh đen đồng bộ */
     .form-box {
         background-color: #1E2640;
         border: 1px solid #2D3748;
@@ -35,7 +34,6 @@
         font-size: 14px;
     }
 
-    /* Các ô nhập dữ liệu nền tối - Không animation dãn nở */
     .form-group input, .form-group textarea {
         width: 100%;
         padding: 12px;
@@ -51,7 +49,6 @@
         outline: none;
     }
 
-    /* Nút lưu phẳng tĩnh */
     .btn-submit {
         background-color: #00F0FF;
         color: #121824;
@@ -66,7 +63,6 @@
         background-color: #00D8E6;
     }
 
-    /* Nút quay lại tĩnh */
     .btn-back {
         background-color: transparent;
         color: #94A3B8;
@@ -100,7 +96,7 @@
 
             <div class="form-group">
                 <label for="desc">Mô tả ngắn</label>
-                <textarea id="desc" name="desc" rows="4" placeholder="Nhập vài dòng mô tả cho danh mục này...">{{ old('desc') }}</textarea>
+                <textarea id="desc" name="desc" rows="4" placeholder="Nhập mô tả cho danh mục này...">{{ old('desc') }}</textarea>
             </div>
 
             <div class="d-flex justify-content-between pt-3">

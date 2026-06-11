@@ -12,7 +12,7 @@ class ViewhistoryController extends Controller
 {
     public function index()
     {
-        $histories = Viewhistory::with(['user', 'article'])->get();
+        $histories = Viewhistory::with(['user', 'articles'])->get();
         return view('viewhistories.index', ['histories' => $histories]);
     }
 

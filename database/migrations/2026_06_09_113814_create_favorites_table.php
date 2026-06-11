@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('article_id')->constrained('articles');
-            $table->date('staydate');
+            $table->date('staydate')->useCurrent();
             $table->timestamps();
         });
     }

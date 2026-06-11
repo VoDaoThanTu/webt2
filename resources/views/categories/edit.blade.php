@@ -1,7 +1,6 @@
 @extends('layouts.master')
 
 <style>
-    /* Khung hộp Form chỉnh sửa đồng bộ */
     .form-box {
         background-color: #1E2640;
         border: 1px solid #2D3748;
@@ -35,7 +34,6 @@
         font-size: 14px;
     }
 
-    /* Các ô input tối màu chống tàng hình chữ */
     .form-group input, .form-group textarea {
         width: 100%;
         padding: 12px;
@@ -51,7 +49,6 @@
         outline: none;
     }
 
-    /* Nút cập nhật khối phẳng */
     .btn-update {
         background-color: #00F0FF;
         color: #121824;
@@ -66,7 +63,6 @@
         background-color: #00D8E6;
     }
 
-    /* Nút hủy bỏ tĩnh */
     .btn-back {
         background-color: transparent;
         color: #94A3B8;

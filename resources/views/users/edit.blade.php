@@ -1,7 +1,6 @@
 @extends('layouts.master')
 
 <style>
-    /* Khung hộp Form chỉnh sửa xanh đen tối */
     .form-box {
         background-color: #1E2640;
         border: 1px solid #2D3748;
@@ -35,7 +34,6 @@
         font-size: 14px;
     }
 
-    /* Các ô nhập liệu tối màu */
     .form-group input, .form-group select {
         width: 100%;
         padding: 12px;
@@ -51,7 +49,6 @@
         outline: none;
     }
 
-    /* Nút Cập nhật khối phẳng tĩnh */
     .btn-update {
         background-color: #00F0FF;
         color: #121824;
@@ -66,7 +63,6 @@
         background-color: #00D8E6;
     }
 
-    /* Nút hủy bỏ */
     .btn-back {
         background-color: transparent;
         color: #94A3B8;
@@ -102,16 +98,11 @@
             </div>
 
             <div class="form-group">
-                <label for="password">Mật khẩu mới (Bỏ trống nếu giữ nguyên)</label>
-                <input type="password" id="password" name="password" placeholder="Chỉ nhập khi muốn đổi mật khẩu">
-            </div>
-
-            <div class="form-group">
                 <label for="role">Vai trò hệ thống</label>
                 <select id="role" name="role" required>
-                    <option value="reader" {{ $user->role == 'reader' ? 'selected' : '' }}>Độc giả (Reader)</option>
-                    <option value="author" {{ $user->role == 'author' ? 'selected' : '' }}>Tác giả (Author)</option>
-                    <option value="admin" {{ $user->role == 'admin' ? 'selected' : '' }}>Quản trị viên (Admin)</option>
+                    @foreach($roles as $key => $value)
+                        <option value="{{ $key }}" {{ old('role', $user->role) == $key ? 'selected' : '' }}>{{ $value }}</option>
+                    @endforeach
                 </select>
             </div>
 

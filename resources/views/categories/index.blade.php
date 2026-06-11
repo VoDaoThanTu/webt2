@@ -1,7 +1,6 @@
 @extends('layouts.master')
 
 <style>
-    /* Khung hộp quản lý nền xanh đen hi-tech phẳng lì */
     .manage-box {
         background-color: #1E2640;
         border: 1px solid #2D3748;
@@ -24,7 +23,6 @@
         align-items: center;
     }
 
-    /* Nút thêm mới dạng khối phẳng, không animation */
     .btn-add {
         background-color: #00F0FF;
         color: #121824;
@@ -40,7 +38,13 @@
         background-color: #00D8E6;
     }
 
-    /* Nút Sửa tĩnh hoàn toàn */
+    .action-group {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+    }
+
     .btn-action-edit {
         background-color: transparent;
         color: #00F0FF;
@@ -49,8 +53,8 @@
         font-weight: 600;
         text-decoration: none;
         border-radius: 4px;
-        margin-right: 5px;
         display: inline-block;
+        box-sizing: border-box;
     }
 
     .btn-action-edit:hover {
@@ -58,7 +62,6 @@
         color: #121824;
     }
 
-    /* Nút Xóa tĩnh hoàn toàn */
     .btn-action-delete {
         background-color: transparent;
         color: #EF4444;
@@ -67,6 +70,7 @@
         font-weight: 600;
         border-radius: 4px;
         cursor: pointer;
+        display: inline-block;
     }
 
     .btn-action-delete:hover {
@@ -74,7 +78,6 @@
         color: #FFFFFF;
     }
 
-    /* CẤU HÌNH BẢNG TỐI CHỐNG ẨN CHỮ */
     .table-custom {
         width: 100%;
         border-collapse: collapse;
@@ -93,15 +96,14 @@
         text-align: left;
     }
 
-    /* Ép ruột bảng sang nền tối của hộp, chữ trắng sáng */
     .table-custom td {
         background-color: #1E2640;
         color: #E2E8F0;
         border-bottom: 1px solid #2D3748;
         padding: 14px 10px;
+        vertical-align: middle;
     }
 
-    /* Fix cứng màu cho dòng thông báo trống để không bị tàng hình */
     .text-empty-state {
         color: #94A3B8 !important;
         font-weight: 500;
@@ -123,7 +125,7 @@
                 <th style="width: 10%;">ID</th>
                 <th style="width: 30%;">Tên danh mục</th>
                 <th>Mô tả tóm tắt</th>
-                <th style="width: 20%;" class="text-center">Hành động</th>
+                <th style="width: 22%;" class="text-center">Hành động</th>
             </tr>
             </thead>
             <tbody>
@@ -132,20 +134,22 @@
                     <td>#{{ $category->id }}</td>
                     <td class="fw-bold" style="color: #FFFFFF;">{{ $category->name }}</td>
                     <td style="color: #94A3B8;">{{ $category->desc ?? '(Trống)' }}</td>
-                    <td class="text-center">
-                        <a href="{{ url('/categories/'.$category->id.'/edit') }}" class="btn-action-edit">Sửa</a>
+                    <td>
+                        <div class="action-group">
+                            <a href="{{ url('/categories/'.$category->id.'/edit') }}" class="btn-action-edit">Sửa</a>
 
-                        <form action="{{ url('/categories/'.$category->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Ông có chắc chắn muốn xóa danh mục này không?')">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn-action-delete">Xóa</button>
-                        </form>
+                            <form action="{{ url('/categories/'.$category->id) }}" method="POST" style="margin: 0;" onsubmit="return confirm('Chắc chắn muốn xóa danh mục này không?')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn-action-delete">Xóa</button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
             @empty
                 <tr>
                     <td colspan="4" class="text-center text-empty-state">
-                        Chưa có danh mục nào được tạo trong hệ thống.
+                        Chưa có danh mục nào được tạo
                     </td>
                 </tr>
             @endforelse

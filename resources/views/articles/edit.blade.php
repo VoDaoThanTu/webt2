@@ -1,7 +1,6 @@
 @extends('layouts.master')
 
 <style>
-    /* Khung hộp Form xanh đen */
     .form-box {
         background-color: #1E2640;
         border: 1px solid #2D3748;
@@ -35,7 +34,6 @@
         font-size: 14px;
     }
 
-    /* Các ô điền thông tin tối màu - Không hiệu ứng mượt khi chọn */
     .form-group input, .form-group select, .form-group textarea {
         width: 100%;
         padding: 12px;
@@ -51,7 +49,6 @@
         outline: none;
     }
 
-    /* Tài khoản tác giả bị khóa cứng */
     .form-group input:disabled {
         background-color: #1A202C;
         color: #4A5568;
@@ -59,7 +56,6 @@
         cursor: not-allowed;
     }
 
-    /* Vùng chứa thẻ Tag */
     .tag-checkbox-group {
         border: 1px solid #2D3748;
         border-radius: 6px;
@@ -85,7 +81,6 @@
         cursor: pointer;
     }
 
-    /* Nút bấm phẳng tĩnh hoàn toàn */
     .btn-update {
         background-color: #00F0FF;
         color: #121824;
@@ -114,67 +109,102 @@
         background-color: rgba(255, 255, 255, 0.05);
         color: #FFFFFF;
     }
+
+    @if(request()->is('author*'))
+        .btn-update {
+        background-color: #00FF87 !important;
+        color: #121824 !important;
+    }
+    .btn-update:hover {
+        background-color: #00E575 !important;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+        border-color: #00FF87 !important;
+    }
+    .tag-item input {
+        accent-color: #00FF87 !important;
+    }
+    @endif
 </style>
 
 @section('content')
     <div class="form-box">
-        <h3>Điều chỉnh bài viết (Quyền Admin)</h3>
+        <h3>{{ request()->is('author*') ? 'Chỉnh sửa bài viết (Tác giả)' : 'Điều chỉnh bài viết' }}</h3>
 
-        <form action="{{ url('/articles/'.$article->id) }}" method="POST">
-            @csrf
-            @method('PUT')
+        @if(request()->is('author*'))
+            <form action="{{ url('/author/articles/update/'.$article->id) }}" method="POST" enctype="multipart/form-data">
+                @else
+                    <form action="{{ url('/articles/'.$article->id) }}" method="POST" enctype="multipart/form-data">
+                        @method('PUT')
+                        @endif
+                        @csrf
 
-            <div class="row">
-                <div class="col-md-6 form-group">
-                    <label for="category_id">Điều chỉnh danh mục</label>
-                    <select id="category_id" name="category_id" required>
-                        @foreach($categories as $cat)
-                            <option value="{{ $cat->id }}" {{ $cat->id == $article->category_id ? 'selected' : '' }}>
-                                {{ $cat->name }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label for="category_id">Điều chỉnh danh mục</label>
+                                <select id="category_id" name="category_id" required>
+                                    @foreach($categories as $cat)
+                                        <option value="{{ $cat->id }}" {{ $cat->id == $article->category_id ? 'selected' : '' }}>
+                                            {{ $cat->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
 
-                <div class="col-md-6 form-group">
-                    <label>Tác giả bài viết</label>
-                    <input type="text" value="{{ $article->user->fullname ?? 'Ẩn danh' }}" disabled>
-                    <input type="hidden" name="user_id" value="{{ $article->user_id }}">
-                </div>
-            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Tác giả bài viết</label>
+                                <input type="text" value="{{ $article->user->fullname ?? 'Ẩn danh' }}" disabled>
+                                <input type="hidden" name="user_id" value="{{ $article->user_id }}">
+                            </div>
+                        </div>
 
-            <div class="form-group">
-                <label for="title">Tiêu đề bài viết</label>
-                <input type="text" id="title" name="title" value="{{ old('title', $article->title) }}" required>
-            </div>
+                        <div class="form-group">
+                            <label for="title">Tiêu đề bài viết</label>
+                            <input type="text" id="title" name="title" value="{{ old('title', $article->title) }}" required>
+                        </div>
 
-            <div class="form-group">
-                <label for="content">Nội dung bài viết</label>
-                <textarea id="content" name="content" rows="8" required>{{ old('content', $article->content) }}</textarea>
-            </div>
+                        <div class="form-group">
+                            <label for="image">Thay đổi hình ảnh đại diện</label>
+                            @if($article->image)
+                                <div class="mb-2">
+                                    <img src="{{ asset('uploads/articles/' . $article->image) }}" alt="Old Thumb" style="width: 120px; height: 75px; object-fit: cover; border-radius: 4px; border: 1px solid #2D3748;">
+                                    <small class="text-muted d-block mt-1">Hình ảnh hiện tại</small>
+                                </div>
+                            @endif
+                            <input type="file" id="image" name="image" accept="image/*">
+                        </div>
 
-            <div class="form-group">
-                <label>Gán lại thẻ bài viết (Tags)</label>
-                <div class="tag-checkbox-group">
-                    @foreach($tags as $tag)
-                        <label class="tag-item">
-                            <input type="checkbox" name="tags[]" value="{{ $tag->id }}"
-                                {{ in_array($tag->id, $article->tags->pluck('id')->toArray()) ? 'checked' : '' }}>
-                            #{{ $tag->name }}
-                        </label>
-                    @endforeach
-                </div>
-            </div>
+                        <div class="form-group">
+                            <label for="content">Nội dung bài viết</label>
+                            <textarea id="content" name="content" rows="8" required>{{ old('content', $article->content) }}</textarea>
+                        </div>
 
-            <div class="form-group" style="width: 50%;">
-                <label for="priority">Thiết lập độ ưu tiên hiển thị (Priority)</label>
-                <input type="number" id="priority" name="priority" value="{{ $article->priority }}" min="1">
-            </div>
+                        <div class="form-group">
+                            <label>Gán lại thẻ bài viết (Tags)</label>
+                            <div class="tag-checkbox-group">
+                                @foreach($tags as $tag)
+                                    <label class="tag-item">
+                                        <input type="checkbox" name="tags[]" value="{{ $tag->id }}"
+                                            {{ in_array($tag->id, $article->tags->pluck('id')->toArray()) ? 'checked' : '' }}>
+                                        #{{ $tag->name }}
+                                    </label>
+                                @endforeach
+                            </div>
+                        </div>
 
-            <div class="d-flex justify-content-between pt-3">
-                <a href="{{ url('/articles') }}" class="btn-back">Hủy bỏ</a>
-                <button type="submit" class="btn-update">Lưu thay đổi</button>
-            </div>
-        </form>
+                        @if(request()->is('author*'))
+                            <input type="hidden" id="priority" name="priority" value="{{ $article->priority }}">
+                        @else
+                            <div class="form-group" style="width: 50%;">
+                                <label for="priority">Thiết lập độ ưu tiên hiển thị (Priority)</label>
+                                <input type="number" id="priority" name="priority" value="{{ $article->priority }}" min="1">
+                            </div>
+                        @endif
+
+                        <div class="d-flex justify-content-between pt-3">
+                            <a href="{{ request()->is('author*') ? url('/author/articles') : url('/articles') }}" class="btn-back">Hủy bỏ</a>
+                            <button type="submit" class="btn-update">Lưu thay đổi</button>
+                        </div>
+                    </form>
     </div>
 @endsection
