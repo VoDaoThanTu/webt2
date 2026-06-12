@@ -89,12 +89,36 @@
         border-radius: 4px;
         cursor: pointer;
     }
+
     .comment-item {
-        background-color: #0F131E;
-        border: 1px solid #2D3748;
-        border-radius: 6px;
-        padding: 15px;
-        margin-bottom: 12px;
+        padding: 15px 0;
+        border-bottom: 1px solid rgba(45, 55, 72, 0.6);
+        background: none !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+    }
+    .btn-reply-toggle {
+        background: none;
+        border: none;
+        color: #38BDF8;
+        font-size: 12px;
+        font-weight: 600;
+        padding: 0;
+        cursor: pointer;
+        text-decoration: none;
+    }
+    .btn-reply-toggle:hover {
+        color: #00F0FF;
+    }
+    .reply-list {
+        border-left: 2px solid #2D3748;
+        padding-left: 15px;
+        margin-top: 10px;
+        margin-left: 5px;
+    }
+    .reply-item-content {
+        padding: 5px 0;
+        margin-bottom: 5px;
     }
 </style>
 
@@ -145,23 +169,65 @@
             </form>
         @else
             <div class="alert alert-secondary text-center mb-4" style="background-color: #0F131E; border-color: #2D3748; color: #94A3B8;">
-                Bạn phải <a href="{{ url('/login') }}" class="text-info fw-bold text-decoration-none">Đăng nhập</a> mới có thể tham gia bình luận bài viết này.
+                Bạn phải <a href="{{ url('/login') }}" class="text-info fw-bold text-decoration-none">Đăng nhập</a>
             </div>
         @endif
 
         <div class="comment-list">
-            @forelse($article->comments as $comment)
+            @forelse($article->comments->filter(function($c) { return $c->parent_id == null || $c->parent_id == 0; }) as $comment)
                 <div class="comment-item">
                     <div class="d-flex justify-content-between mb-1" style="font-size: 13px;">
-                        <strong style="color: #00F0FF;">👤 {{ $comment->user->fullname ?? 'Độc giả ẩn danh' }}</strong>
-                        <span style="color: #64748B;">🕒 {{ $comment->created_at->format('H:i d/m/Y') }}</span>
+                        <strong style="color: #00F0FF;">{{ $comment->user->fullname ?? 'Độc giả ẩn danh' }}</strong>
+                        <span style="color: #64748B;">{{ $comment->created_at->format('H:i d/m/Y') }}</span>
                     </div>
-                    <div style="color: #E2E8F0; font-size: 14px;">{{ $comment->content }}</div>
+                    <div style="color: #E2E8F0; font-size: 14px; margin-bottom: 6px;">{{ $comment->content }}</div>
+
+                    @if(Auth::check())
+                        <div class="text-start">
+                            <button type="button" class="btn-reply-toggle" onclick="toggleReplyForm({{ $comment->id }})">Phản hồi</button>
+                        </div>
+
+                        <form id="reply-form-{{ $comment->id }}" action="{{ url('/article/comment/'.$article->id) }}" method="POST" class="comment-form mt-2 d-none">
+                            @csrf
+                            <input type="hidden" name="parent_id" value="{{ $comment->id }}">
+                            <div class="mb-2">
+                                <textarea name="content" rows="2" placeholder="Trả lời bình luận này..." style="font-size: 13px;" required></textarea>
+                            </div>
+                            <div class="text-end">
+                                <button type="submit" class="btn-comment" style="padding: 5px 14px; font-size: 12px;">Gửi câu trả lời</button>
+                            </div>
+                        </form>
+                    @endif
+
+                    @if($comment->replies && $comment->replies->count() > 0)
+                        <div class="reply-list">
+                            @foreach($comment->replies as $reply)
+                                <div class="reply-item-content">
+                                    <div class="d-flex justify-content-between mb-1" style="font-size: 12px;">
+                                        <strong style="color: #00FF87;">{{ $reply->user->fullname ?? 'Độc giả ẩn danh' }}</strong>
+                                        <span style="color: #64748B;">{{ $reply->created_at->format('H:i d/m/Y') }}</span>
+                                    </div>
+                                    <div style="color: #E2E8F0; font-size: 13px;">{{ $reply->content }}</div>
+                                </div>
+                            @endforeach
+                        </div>
+                    @endif
                 </div>
             @empty
                 <div class="text-center text-muted py-3 italic" style="font-size: 14px;">Bài viết chưa có bình luận nào</div>
             @endforelse
         </div>
     </div>
+
+    <script>
+        function toggleReplyForm(commentId) {
+            const form = document.getElementById('reply-form-' + commentId);
+            if (form.classList.contains('d-none')) {
+                form.classList.remove('d-none');
+            } else {
+                form.classList.add('d-none');
+            }
+        }
+    </script>
 
 @endsection

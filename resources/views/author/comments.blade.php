@@ -41,14 +41,14 @@
 
 @section('content')
     <div class="manage-box">
-        <div class="manage-title">Độc giả bình luận trên bài viết</div>
+        <div class="manage-title">Binh luan</div>
 
         <table class="table-custom">
             <thead>
             <tr>
-                <th style="width: 20%;">Người bình luận</th>
-                <th>Nội dung thảo luận</th>
-                <th style="width: 35%;">Thuộc bài viết</th>
+                <th style="width: 20%;">Nguoi binh luan</th>
+                <th>Noi dung thao luan</th>
+                <th style="width: 35%;">Thuoc bai viet</th>
             </tr>
             </thead>
             <tbody>

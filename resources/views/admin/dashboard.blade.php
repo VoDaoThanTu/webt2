@@ -73,43 +73,43 @@
 
 @section('content')
 
-    <div class="dashboard-title">Hệ thống quản trị - The Tech Pulse</div>
+    <div class="dashboard-title">Dashboard</div>
 
     <div class="card-boxes">
         <div class="box-item">
-            <h3>Bài viết công khai</h3>
+            <h3>Bai viet cong khai</h3>
             <p class="count">{{ $totalArticles }}</p>
         </div>
 
         <div class="box-item">
-            <h3>Bài viết chờ duyệt</h3>
+            <h3>Bai viet cho duyet</h3>
             <p class="count">{{ $pendingArticles }}</p>
         </div>
 
         <div class="box-item">
-            <h3>Danh mục</h3>
+            <h3>Danh muc</h3>
             <p class="count">{{ $totalCategories }}</p>
         </div>
 
         <div class="box-item">
-            <h3>Thẻ</h3>
+            <h3>The</h3>
             <p class="count">{{ $totalTags }}</p>
         </div>
 
         <div class="box-item">
-            <h3>Bình luận</h3>
+            <h3>Binh luan</h3>
             <p class="count">{{ $totalComments }}</p>
         </div>
 
         <div class="box-item">
-            <h3>Người dùng</h3>
+            <h3>Nguoi dung</h3>
             <p class="count">{{ $totalUsers }}</p>
         </div>
 
         <div class="box-item" style="border-color: #00F0FF; background-color: rgba(0, 240, 255, 0.02); padding: 20px; border-radius: 8px; border: 1px solid #2D3748;">
-            <h3 style="color: #94A3B8; font-size: 14px; text-transform: uppercase;">Yêu cầu làm Tác giả</h3>
+            <h3 style="color: #94A3B8; font-size: 14px; text-transform: uppercase;">Yeu cau lam tac gia</h3>
             <p class="count" style="color: #00F0FF; font-size: 36px; font-weight: 800; margin: 10px 0;">{{ $authorRequests }}</p>
-            <a href="{{ url('/admin/author-requests') }}" class="btn-check" style="color: #00F0FF; text-decoration: none; font-size: 13px; font-weight: 600;">Xem chi tiết danh sách ➔</a>
+            <a href="{{ url('/admin/author-requests') }}" class="btn-check" style="color: #00F0FF; text-decoration: none; font-size: 13px; font-weight: 600;">Xem chi tiet danh sach</a>
         </div>
     </div>
 

@@ -40,11 +40,10 @@
         border: 1px solid #2D3748;
     }
 
-    /* Khi chỉ chuột vào, giữ nguyên màu nền tối và viền cũ, không làm sáng lên */
     .sidebar-admin .menu ul li a:hover {
-        background-color: #242F4D; /* Chỉ sáng nhẹ một chút rất khó nhận ra */
-        color: #94A3B8;            /* Giữ nguyên màu chữ xám */
-        border-color: #2D3748;      /* Giữ nguyên màu viền */
+        background-color: #242F4D;
+        color: #94A3B8;
+        border-color: #2D3748;
     }
 
     .logout-box {
@@ -80,17 +79,17 @@
     <nav class="menu">
         <ul>
             <li><a href="{{ url('/dashboard') }}">Dashboard Admin</a></li>
-            <li><a href="{{ url('/articles') }}">Quản lý bài viết</a></li>
-            <li><a href="{{ url('/categories') }}">Quản lý danh mục</a></li>
-            <li><a href="{{ url('/tags') }}">Quản lý thẻ </a></li>
-            <li><a href="{{ url('/comments') }}">Quản lý bình luận</a></li>
-            <li><a href="{{ url('/users') }}">Quản lý người dùng</a></li>
+            <li><a href="{{ url('/articles') }}">Quan ly bai viet</a></li>
+            <li><a href="{{ url('/categories') }}">Quan ly danh muc</a></li>
+            <li><a href="{{ url('/tags') }}">Quan ly the</a></li>
+            <li><a href="{{ url('/comments') }}">Quan ly binh luan</a></li>
+            <li><a href="{{ url('/users') }}">Quan ly nguoi dung</a></li>
         </ul>
     </nav>
 
     <div class="logout-box">
         <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form-admin').submit();">
-            <button>Đăng xuất</button>
+            <button>Logout</button>
         </a>
         <form id="logout-form-admin" action="{{ route('logout') }}" method="POST" class="d-none">
             @csrf

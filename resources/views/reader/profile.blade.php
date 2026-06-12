@@ -59,7 +59,7 @@
 
 @section('main_content')
     <div class="profile-card">
-        <div class="profile-title">Hồ sơ cá nhân của tôi</div>
+        <div class="profile-title">Ho so ca nhan</div>
 
         @if(session('success'))
             <div class="alert alert-success" style="background-color: rgba(16, 185, 129, 0.1); border: 1px solid #10B981; color: #10B981; padding: 12px; margin-bottom: 20px; border-radius: 4px; font-weight: 600; font-size: 14px;">
@@ -81,41 +81,41 @@
             @csrf
 
             <div class="form-group">
-                <label>Vai trò thành viên</label>
+                <label>Vai tro</label>
                 <input type="text" value="Độc giả hệ thống (Reader)" disabled style="background-color: #121824; color: #4A5568; cursor: not-allowed; border-color: #1E2640;">
 
                 <div class="mt-2">
                     @if(Auth::user()->author_request == 0)
-                        <span class="text-muted small">Tham gia đội ngũ bài viết ?</span>
-                        <button type="button" onclick="event.preventDefault(); document.getElementById('form-request-author').submit();" class="btn btn-sm btn-outline-info ms-2" style="font-size: 12px; padding: 2px 10px;">Đăng ký làm Tác giả</button>
+                        <span class="text-muted small">Dang ky lam tac gia</span>
+                        <button type="button" onclick="event.preventDefault(); document.getElementById('form-request-author').submit();" class="btn btn-sm btn-outline-info ms-2" style="font-size: 12px; padding: 2px 10px;">Dang ky lam tac gia</button>
                     @elseif(Auth::user()->author_request == 1)
-                        <span class="text-warning small fw-semibold">Chờ Admin duyệt</span>
+                        <span class="text-warning small fw-semibold">Cho Admin duyet</span>
                     @endif
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="fullname">Họ và tên hiển thị <span class="text-danger">*</span></label>
+                <label for="fullname">Ho va ten <span class="text-danger">*</span></label>
                 <input type="text" id="fullname" name="fullname" value="{{ old('fullname', $user->fullname) }}" required>
             </div>
 
             <div class="form-group">
-                <label for="email">Địa chỉ Email tài khoản <span class="text-danger">*</span></label>
+                <label for="email">Email <span class="text-danger">*</span></label>
                 <input type="email" id="email" name="email" value="{{ old('email', $user->email) }}" required>
             </div>
 
             <div class="form-group">
-                <label for="password">Mật khẩu mới</label>
-                <input type="password" id="password" name="password" placeholder=Nhập mật khẩu mới">
+                <label for="password">Mat khau moi</label>
+                <input type="password" id="password" name="password" placeholder="Nhap mat khau moi">
             </div>
 
             <div class="form-group">
-                <label for="password_confirmation">Xác nhận lại mật khẩu mới</label>
-                <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Nhập lại mật khẩu mới">
+                <label for="password_confirmation">Nhap lai mat khau moi</label>
+                <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Nhap lai mat khau moi">
             </div>
 
             <div class="text-end pt-2">
-                <button type="submit" class="btn-update-profile">Lưu thay đổi</button>
+                <button type="submit" class="btn-update-profile">Luu thay doi</button>
             </div>
         </form>
     </div>

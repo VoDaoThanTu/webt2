@@ -3,7 +3,7 @@
 @section('content')
     <div class="container-fluid pt-4">
         <div style="background-color: #1E2640; border: 1px solid #2D3748; border-radius: 8px; padding: 25px;">
-            <h4 class="text-white mb-4" style="font-weight: 700; letter-spacing: 0.5px;">PHÊ DUYỆT ĐĂNG KÝ QUYỀN TÁC GIẢ</h4>
+            <h4 class="text-white mb-4" style="font-weight: 700; letter-spacing: 0.5px;">PHÊ DUYỆT</h4>
 
             @if(session('success'))
                 <div class="alert alert-success bg-dark border-success text-success p-3 mb-3" style="font-weight: 600;">
@@ -38,7 +38,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="5" class="text-center text-muted py-4 font-italic">Hiện tại không có yêu cầu nâng cấp quyền nào cần phê duyệt.</td>
+                            <td colspan="5" class="text-center text-muted py-4 font-italic">Hiện tại không có yêu cầu nào cần phê duyệt.</td>
                         </tr>
                     @endforelse
                     </tbody>

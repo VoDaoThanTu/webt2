@@ -129,16 +129,16 @@
 
 @section('content')
     <div class="form-box">
-        <h3>{{ request()->is('author*') ? 'Đăng bài viết mới (Tác giả)' : 'Đăng bài viết mới' }}</h3>
+        <h3>{{ request()->is('author*') ? 'Dang bai viet moi' : 'Dang bai viet moi' }}</h3>
 
         <form action="{{ request()->is('author*') ? url('/author/articles/store') : url('/articles/store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
             <div class="row">
                 <div class="col-md-6 form-group">
-                    <label for="category_id">Thuộc danh mục <span class="text-danger">*</span></label>
+                    <label for="category_id">Thuoc danh muc <span class="text-danger">*</span></label>
                     <select id="category_id" name="category_id" required>
-                        <option value="">-- Chọn danh mục --</option>
+                        <option value="">-- Chon danh muc --</option>
                         @foreach($categories as $cat)
                             <option value="{{ $cat->id }}">{{ $cat->name }}</option>
                         @endforeach
@@ -146,7 +146,7 @@
                 </div>
 
                 <div class="col-md-6 form-group">
-                    <label for="user_id">Người đăng bài (Tác giả) <span class="text-danger">*</span></label>
+                    <label for="user_id">Nguoi dang bai<span class="text-danger">*</span></label>
                     @if(request()->is('author*'))
                         <input type="text" value="{{ Auth::user()->fullname }}" disabled>
                         <input type="hidden" name="user_id" value="{{ Auth::id() }}">
@@ -161,15 +161,15 @@
             </div>
 
             <div class="form-group">
-                <label for="title">Tiêu đề bài viết <span class="text-danger">*</span></label>
-                <input type="text" id="title" name="title" value="{{ old('title') }}" placeholder="Nhập tiêu đề bài viết tại đây..." required>
+                <label for="title">Tieu de bai viet <span class="text-danger">*</span></label>
+                <input type="text" id="title" name="title" value="{{ old('title') }}" placeholder="Nhap tieu de o day..." required>
                 @error('title')
                 <small class="text-danger fw-bold">{{ $message }}</small>
                 @enderror
             </div>
 
             <div class="form-group">
-                <label for="image">Hình ảnh đại diện bài viết <span class="text-danger">*</span></label>
+                <label for="image">Hinh anh dai dien cho bai viet <span class="text-danger">*</span></label>
                 <input type="file" id="image" name="image" accept="image/*" required>
                 @error('image')
                 <small class="text-danger fw-bold">{{ $message }}</small>
@@ -177,22 +177,22 @@
             </div>
 
             <div class="form-group">
-                <label for="content">Nội dung chi tiết bài viết <span class="text-danger">*</span></label>
-                <textarea id="content" name="content" rows="10" placeholder="Viết nội dung bài viết của bạn tại đây..." required>{{ old('content') }}</textarea>
+                <label for="content">Noi dung bai viet <span class="text-danger">*</span></label>
+                <textarea id="content" name="content" rows="10" placeholder="Viet noi dung bai viet o day..." required>{{ old('content') }}</textarea>
                 @error('content')
                 <small class="text-danger fw-bold">{{ $message }}</small>
                 @enderror
             </div>
 
             <div class="form-group">
-                <label>Gán thẻ bài viết (Tags)</label>
+                <label>Gan the cho bai viet</label>
                 <div class="tag-checkbox-group">
                     @forelse($tags as $tag)
                         <label class="tag-item">
                             <input type="checkbox" name="tags[]" value="{{ $tag->id }}"> #{{ $tag->name }}
                         </label>
                     @empty
-                        <small style="color: #64748B; font-style: italic;">Hệ thống chưa thiết lập thẻ tag nào.</small>
+                        <small style="color: #64748B; font-style: italic;">Chua gan the nao.</small>
                     @endforelse
                 </div>
             </div>
@@ -201,14 +201,14 @@
                 <input type="hidden" id="priority" name="priority" value="1">
             @else
                 <div class="form-group" style="width: 50%;">
-                    <label for="priority">Thứ tự ưu tiên hiển thị (Priority)</label>
+                    <label for="priority">Thu tu uu tien</label>
                     <input type="number" id="priority" name="priority" value="1" min="1">
                 </div>
             @endif
 
             <div class="d-flex justify-content-between pt-3" style="border-top: 1px solid #2D3748;">
-                <a href="{{ request()->is('author*') ? url('/author/articles') : url('/articles') }}" class="btn-back">Quay lại</a>
-                <button type="submit" class="btn-submit">Xuất bản bài viết</button>
+                <a href="{{ request()->is('author*') ? url('/author/articles') : url('/articles') }}" class="btn-back">Quay lai</a>
+                <button type="submit" class="btn-submit">Xuat ban bai viet</button>
             </div>
         </form>
     </div>

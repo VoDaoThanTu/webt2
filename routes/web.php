@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-// IMPORT ĐẦY ĐỦ CÁC CONTROLLER HỆ THỐNG
+
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
@@ -11,11 +11,10 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\RegisterController; // Đã thêm import RegisterController
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\ReaderController;
 
-// IMPORT MIDDLEWARE BẢO MẬT ADMIN
 use App\Http\Middleware\CheckAdminLogin;
 
 
@@ -38,6 +37,7 @@ Route::middleware(['auth', CheckAdminLogin::class])->group(function () {
     Route::put('/articles/{article}', [ArticleController::class, 'update'])->name('articles.update');
     Route::delete('/articles/{article}', [ArticleController::class, 'destroy'])->name('articles.destroy');
     Route::get('/articles/approve/{id}', [ArticleController::class, 'approve'])->name('articles.approve');
+    Route::post('/articles/store', [ArticleController::class, 'store'])->name('articles.store');
 
     Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
     Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');

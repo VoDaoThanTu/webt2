@@ -18,7 +18,6 @@
         letter-spacing: 0.5px;
     }
 
-    /* Style nút duyệt bài của Admin */
     .btn-action-approve {
         background-color: transparent;
         color: #00FF87;
@@ -137,11 +136,13 @@
 
         <div class="d-flex justify-content-between align-items-center mb-4 pb-3" style="border-bottom: 1px solid #2D3748;">
             <div class="manage-title">
-                {{ request()->is('author*') ? 'Danh sách bài viết của tôi' : 'Quản lý danh sách bài viết hệ thống' }}
+                {{ request()->is('author*') ? 'Danh sach bai viet cua toi' : 'Quan ly danh sach bai viet' }}
             </div>
 
             @if(request()->is('author*'))
-                <a href="{{ url('/author/articles/create') }}" class="btn btn-sm" style="background-color: #00FF87; color: #121824; font-weight: bold; padding: 8px 16px; text-decoration: none; border-radius: 4px;">+ Đăng bài mới</a>
+                <a href="{{ url('/author/articles/create') }}" class="btn btn-sm" style="background-color: #00FF87; color: #121824; font-weight: bold; padding: 8px 16px; text-decoration: none; border-radius: 4px;">+ Dang bai moi</a>
+            @else
+                <a href="{{ url('/articles/create') }}" class="btn btn-sm" style="background-color: #00F0FF; color: #121824; font-weight: bold; padding: 8px 16px; text-decoration: none; border-radius: 4px;">+ Them bai viet</a>
             @endif
         </div>
 
@@ -149,12 +150,12 @@
             <thead>
             <tr>
                 <th style="width: 6%;">ID</th>
-                <th style="width: 14%;">Hình ảnh</th>
-                <th>Tiêu đề bài viết</th>
-                <th style="width: 16%;">Danh mục</th>
-                <th style="width: 14%;">Tác giả</th>
-                <th style="width: 14%;">Trạng thái</th>
-                <th style="width: 22%;" class="text-center">Hành động</th>
+                <th style="width: 14%;">Hinh anh</th>
+                <th>Tieu de bai viet</th>
+                <th style="width: 16%;">Danh muc</th>
+                <th style="width: 14%;">Tac gia</th>
+                <th style="width: 14%;">Trang thai</th>
+                <th style="width: 22%;" class="text-center">Hanh dong</th>
             </tr>
             </thead>
             <tbody>
@@ -166,39 +167,39 @@
                         @if($article->image)
                             <img src="{{ asset('uploads/articles/' . $article->image) }}" alt="Thumb" style="width: 80px; height: 50px; object-fit: cover; border-radius: 4px; border: 1px solid #2D3748;">
                         @else
-                            <span style="color: #64748B; font-size: 11px; font-style: italic;">Không có ảnh</span>
+                            <span style="color: #64748B; font-size: 11px; font-style: italic;">Khong co anh</span>
                         @endif
                     </td>
 
                     <td class="fw-bold" style="color: #FFFFFF;">{{ $article->title }}</td>
                     <td>
                         <span class="badge-tech">
-                            {{ $article->category->name ?? 'Chưa rõ' }}
+                            {{ $article->category->name ?? 'Chua ro' }}
                         </span>
                     </td>
-                    <td style="color: #94A3B8;">{{ $article->user->fullname ?? 'Ẩn danh' }}</td>
+                    <td style="color: #94A3B8;">{{ $article->user->fullname ?? 'An danh' }}</td>
 
                     <td>
                         @if($article->status == 1)
-                            <span style="color: #00FF87; font-weight: 600;">● Đã xuất bản</span>
+                            <span style="color: #00FF87; font-weight: 600;">Da xuat ban</span>
                         @else
-                            <span style="color: #FFB800; font-weight: 600; font-style: italic;">● Chờ duyệt</span>
+                            <span style="color: #FFB800; font-weight: 600; font-style: italic;">Cho duyet</span>
                         @endif
                     </td>
 
                     <td class="text-center">
                         @if(request()->is('author*'))
-                            <a href="{{ url('/author/articles/edit/'.$article->id) }}" class="btn-action-edit">Sửa</a>
-                            <a href="{{ url('/author/articles/delete/'.$article->id) }}" class="btn-action-delete" onclick="return confirm('Bạn có chắc chắn muốn xóa bài viết này?')">Xóa</a>
+                            <a href="{{ url('/author/articles/edit/'.$article->id) }}" class="btn-action-edit">Sua</a>
+                            <a href="{{ url('/author/articles/delete/'.$article->id) }}" class="btn-action-delete" onclick="return confirm('Ban co chac muon xoa khong?')">Xoa</a>
                         @else
                             @if($article->status == 0)
-                                <a href="{{ url('/articles/approve/'.$article->id) }}" class="btn-action-approve">Duyệt bài</a>
+                                <a href="{{ url('/articles/approve/'.$article->id) }}" class="btn-action-approve">Duyet bai</a>
                             @endif
-                            <a href="{{ url('/articles/'.$article->id.'/edit') }}" class="btn-action-edit">Sửa</a>
-                            <form action="{{ url('/articles/'.$article->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Xóa bài viết này?')">
+                            <a href="{{ url('/articles/'.$article->id.'/edit') }}" class="btn-action-edit">Sua</a>
+                            <form action="{{ url('/articles/'.$article->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Xoa bai viet nay?')">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn-action-delete">Xóa</button>
+                                <button type="submit" class="btn-action-delete">Xoa</button>
                             </form>
                         @endif
                     </td>
@@ -206,7 +207,7 @@
             @empty
                 <tr>
                     <td colspan="7" class="text-center text-empty-state">
-                        Hiện tại hệ thống chưa có bài viết nào từ các tác giả.
+                        Tac gia nay chua co bai viet
                     </td>
                 </tr>
             @endforelse

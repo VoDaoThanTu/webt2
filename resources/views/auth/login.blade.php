@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Tech Pulse - Đăng nhập hệ thống</title>
+    <title>Login</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
@@ -97,13 +97,13 @@
 <body>
 
 <div class="login-box">
-    <div class="login-brand">The Tech Pulse</div>
+    <div class="login-brand">Tech Pulse</div>
 
     <form action="{{ route('login.handle') }}" method="POST">
         @csrf
 
         <div class="form-group">
-            <label for="email">Địa chỉ Email</label>
+            <label for="email">Email</label>
             <input type="email" id="email" name="email" value="{{ old('email') }}" placeholder="name@example.com" required>
             @error('email')
             <span class="error-msg">{{ $message }}</span>
@@ -111,17 +111,17 @@
         </div>
 
         <div class="form-group">
-            <label for="password">Mật khẩu bảo mật</label>
+            <label for="password">Password</label>
             <input type="password" id="password" name="password" placeholder="••••••••" required>
             @error('password')
             <span class="error-msg">{{ $message }}</span>
             @enderror
         </div>
 
-        <button type="submit" class="btn-login">Đăng nhập</button>
+        <button type="submit" class="btn-login">Login</button>
         <div class="text-center mt-3" style="font-size: 14px;">
             <a href="{{ url('/register') }}" style="color: #94A3B8; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#00F0FF'" onmouseout="this.style.color='#94A3B8'">
-                Đăng ký
+                Register
             </a>
         </div>
     </form>

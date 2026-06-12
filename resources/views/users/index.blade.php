@@ -61,17 +61,17 @@
 @section('content')
     <div class="manage-box">
         <div class="manage-title">
-            <span>Quản lý thành viên</span>
-            <a href="{{ url('/users/create') }}" class="btn-add">+ Thêm người dùng</a>
+            <span>Quan ly thanh vien</span>
+            <a href="{{ url('/users/create') }}" class="btn-add">+ Them nguoi dung</a>
         </div>
 
         <table class="table-custom">
             <thead>
             <tr>
-                <th>Họ và tên</th>
-                <th>Email tài khoản</th>
-                <th>Quyền quản trị</th>
-                <th>Hành động</th>
+                <th>Ho va ten</th>
+                <th>Email</th>
+                <th>Vai tro</th>
+                <th>Hanh dong</th>
             </tr>
             </thead>
             <tbody>
@@ -83,9 +83,9 @@
                         @if($user->role == 'admin')
                             <span class="badge-role-admin">Admin</span>
                         @elseif($user->role == 'articles')
-                            <span class="badge-role-author">Tác giả</span>
+                            <span class="badge-role-author">Tac gia</span>
                         @else
-                            <span class="badge-role-reader">Độc giả</span>
+                            <span class="badge-role-reader">Doc gia</span>
                         @endif
                     </td>
                     <td>
@@ -93,15 +93,15 @@
                             @if($user->author_request == 1)
                                 <form action="{{ url('/admin/author-requests/approve/'.$user->id) }}" method="POST" style="margin: 0;">
                                     @csrf
-                                    <button type="submit" class="btn-action-approve">Duyệt làm Tác giả</button>
+                                    <button type="submit" class="btn-action-approve">Duyet lam tac gia</button>
                                 </form>
                             @endif
 
-                            <a href="{{ url('/users/'.$user->id.'/edit') }}" class="btn-action-edit">Sửa</a>
-                            <form action="{{ url('/users/'.$user->id) }}" method="POST" style="margin: 0;" onsubmit="return confirm('Có chắc chắn muốn xóa tài khoản này?')">
+                            <a href="{{ url('/users/'.$user->id.'/edit') }}" class="btn-action-edit">Sua</a>
+                            <form action="{{ url('/users/'.$user->id) }}" method="POST" style="margin: 0;" onsubmit="return confirm('Co chac muon xoa khong?')">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn-action-delete">Xóa</button>
+                                <button type="submit" class="btn-action-delete">Xoa</button>
                             </form>
                         </div>
                     </td>

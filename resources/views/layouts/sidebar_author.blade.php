@@ -40,11 +40,10 @@
         border: 1px solid #2D3748;
     }
 
-    /* Khi chỉ chuột vào, giữ nguyên màu nền tối và viền cũ, không làm sáng lên */
     .sidebar-author .menu ul li a:hover {
-        background-color: #242F4D; /* Chỉ sáng nhẹ một chút rất khó nhận ra */
-        color: #94A3B8;            /* Giữ nguyên màu chữ xám */
-        border-color: #2D3748;      /* Giữ nguyên màu viền */
+        background-color: #242F4D;
+        color: #94A3B8;
+        border-color: #2D3748;
     }
 
     .logout-box {
@@ -79,16 +78,16 @@
 
     <nav class="menu">
         <ul>
-            <li><a href="{{ route('author.dashboard') }}">Dashboard Tác giả</a></li>
-            <li><a href="{{ route('author.articles.index') }}">Bài viết của tôi</a></li>
-            <li><a href="{{ route('author.comments') }}">Bình luận bài viết</a></li>
-            <li><a href="{{ route('author.profile') }}">Hồ sơ cá nhân</a></li>
+            <li><a href="{{ route('author.dashboard') }}">Dashboard Tac gia</a></li>
+            <li><a href="{{ route('author.articles.index') }}">Bai viet cua toi</a></li>
+            <li><a href="{{ route('author.comments') }}">Binh luan bai viet</a></li>
+            <li><a href="{{ route('author.profile') }}">Ho so ca nhan</a></li>
         </ul>
     </nav>
 
     <div class="logout-box">
         <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form-author').submit();">
-            <button>Đăng xuất</button>
+            <button>LOGOUT</button>
         </a>
         <form id="logout-form-author" action="{{ route('logout') }}" method="POST" class="d-none">
             @csrf

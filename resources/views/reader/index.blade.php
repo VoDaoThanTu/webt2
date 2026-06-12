@@ -57,7 +57,7 @@
 </style>
 
 @section('main_content')
-    <div class="section-heading">Tin công nghệ mới nhất</div>
+    <div class="section-heading">Tin tuc moi nhat</div>
 
     @forelse($articles as $art)
         <div class="article-row">
@@ -65,7 +65,7 @@
             <div>
                 <div class="article-meta">
                     <span class="text-info font-weight-bold">{{ $art->category->name ?? 'Chưa rõ' }}</span>
-                    Đăng bởi: <span class="text-white">{{ $art->user->fullname ?? 'Ẩn danh' }}</span>
+                    Dang boi: <span class="text-white">{{ $art->user->fullname ?? 'Ẩn danh' }}</span>
                     {{ $art->date_posted }}
                 </div>
                 <a href="{{ url('/article/'.$art->id) }}" class="article-link">

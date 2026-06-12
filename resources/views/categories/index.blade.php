@@ -115,17 +115,17 @@
 @section('content')
     <div class="manage-box">
         <div class="manage-title">
-            <span>Quản lý danh mục bài viết</span>
-            <a href="{{ url('/categories/create') }}" class="btn-add">+ Thêm danh mục</a>
+            <span>Quan ly danh muc</span>
+            <a href="{{ url('/categories/create') }}" class="btn-add">+ Them danh muc</a>
         </div>
 
         <table class="table-custom">
             <thead>
             <tr>
                 <th style="width: 10%;">ID</th>
-                <th style="width: 30%;">Tên danh mục</th>
-                <th>Mô tả tóm tắt</th>
-                <th style="width: 22%;" class="text-center">Hành động</th>
+                <th style="width: 30%;">Ten danh muc</th>
+                <th>Mo ta</th>
+                <th style="width: 22%;" class="text-center">Hanh dong</th>
             </tr>
             </thead>
             <tbody>
@@ -136,12 +136,12 @@
                     <td style="color: #94A3B8;">{{ $category->desc ?? '(Trống)' }}</td>
                     <td>
                         <div class="action-group">
-                            <a href="{{ url('/categories/'.$category->id.'/edit') }}" class="btn-action-edit">Sửa</a>
+                            <a href="{{ url('/categories/'.$category->id.'/edit') }}" class="btn-action-edit">Sua</a>
 
-                            <form action="{{ url('/categories/'.$category->id) }}" method="POST" style="margin: 0;" onsubmit="return confirm('Chắc chắn muốn xóa danh mục này không?')">
+                            <form action="{{ url('/categories/'.$category->id) }}" method="POST" style="margin: 0;" onsubmit="return confirm('Chac muon xoa khong?')">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn-action-delete">Xóa</button>
+                                <button type="submit" class="btn-action-delete">Xoa</button>
                             </form>
                         </div>
                     </td>
@@ -149,7 +149,7 @@
             @empty
                 <tr>
                     <td colspan="4" class="text-center text-empty-state">
-                        Chưa có danh mục nào được tạo
+                        Chua co danh muc nao
                     </td>
                 </tr>
             @endforelse

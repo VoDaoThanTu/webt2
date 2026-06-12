@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Tech Pulse - Tin tức Công nghệ siêu tốc</title>
+    <title>Trang tin tuc</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         html, body {
@@ -96,7 +96,6 @@
             color: #00F0FF;
         }
 
-        /* CSS phân trang dùng chung */
         .pagination .page-link {
             background-color: #1E2640 !important;
             border-color: #2D3748 !important;
@@ -129,29 +128,29 @@
 <div class="main-wrapper">
     <nav class="navbar-custom">
         <div class="container d-flex justify-content-between align-items-center">
-            <a href="{{ url('/home') }}" class="navbar-logo">⚡ The Tech Pulse</a>
+            <a href="{{ url('/home') }}" class="navbar-logo">The Tech Pulse</a>
 
             <div class="d-flex gap-3 align-items-center">
                 @if(Auth::check())
-                    <a href="{{ url('/reader/favorites') }}" class="text-decoration-none text-warning fw-semibold small">Yêu thích</a>
-                    <a href="{{ url('/reader/history') }}" class="text-decoration-none text-info fw-semibold small">Lịch sử</a>
-                    <a href="{{ url('/reader/profile') }}" class="text-decoration-none text-white fw-semibold small">Hồ sơ</a>
+                    <a href="{{ url('/reader/favorites') }}" class="text-decoration-none text-warning fw-semibold small">Yeu thich</a>
+                    <a href="{{ url('/reader/history') }}" class="text-decoration-none text-info fw-semibold small">Lich su</a>
+                    <a href="{{ url('/reader/profile') }}" class="text-decoration-none text-white fw-semibold small">Ho so</a>
 
-                    <span class="text-muted pt-1 border-start ps-3" style="font-size: 14px;">Hi, {{ Auth::user()->fullname }}</span>
+                    <span class="pt-1 border-start ps-3 fw-bold" style="font-size: 14px; color: #00FF87; border-color: #2D3748 !important;"> {{ Auth::user()->fullname }}</span>
 
                     @if(Auth::user()->role === 'admin')
-                        <a href="{{ url('/dashboard') }}" class="btn btn-sm btn-outline-info">Quản trị</a>
+                        <a href="{{ url('/dashboard') }}" class="btn btn-sm btn-outline-info">Quan tri</a>
                     @elseif(Auth::user()->role === 'author' || Auth::user()->role === 'articles')
-                        <a href="{{ url('/author/dashboard') }}" class="btn btn-sm btn-outline-success">Viết bài</a>
+                        <a href="{{ url('/author/dashboard') }}" class="btn btn-sm btn-outline-success">Viet bai</a>
                     @endif
 
                     <form action="{{ url('/logout') }}" method="POST" class="d-inline m-0">
                         @csrf
-                        <button type="submit" class="btn btn-sm btn-outline-danger" style="font-size: 12px; padding: 3px 8px;">Thoát</button>
+                        <button type="submit" class="btn btn-sm btn-outline-danger" style="font-size: 12px; padding: 3px 8px;">Dang xuat</button>
                     </form>
                 @else
-                    <a href="{{ url('/reader/history') }}" class="text-decoration-none text-info fw-semibold small me-2">🕒 Lịch sử xem</a>
-                    <a href="{{ url('/login') }}" class="btn btn-sm" style="background-color: #00F0FF; color: #121824; font-weight: bold;">Đăng nhập</a>
+                    <a href="{{ url('/reader/history') }}" class="text-decoration-none text-info fw-semibold small me-2">Lich su xem</a>
+                    <a href="{{ url('/login') }}" class="btn btn-sm" style="background-color: #00F0FF; color: #121824; font-weight: bold;">Dang nhap</a>
                 @endif
             </div>
         </div>
@@ -166,29 +165,29 @@
 
             <div class="col-lg-4">
                 <div class="sidebar-box">
-                    <div class="sidebar-title">Danh mục công nghệ</div>
+                    <div class="sidebar-title">Danh muc cong nghe</div>
                     <ul class="list-link-custom">
                         @forelse($shared_categories as $cat)
                             <li>
                                 <a href="{{ url('/client/category/'.$cat->id) }}">
-                                    📂 {{ $cat->name }}
+                                    {{ $cat->name }}
                                 </a>
                             </li>
                         @empty
-                            <li class="text-muted font-italic">Chưa có danh mục</li>
+                            <li class="text-muted font-italic">Chua co danh muc</li>
                         @endforelse
                     </ul>
                 </div>
 
                 <div class="sidebar-box">
-                    <div class="sidebar-title">Xu hướng tìm kiếm</div>
+                    <div class="sidebar-title">Tim kiem theo the</div>
                     <div class="tag-cloud">
                         @forelse($shared_tags as $t)
                             <a href="{{ url('/client/tag/'.$t->id) }}" class="tag-item">
                                 # {{ $t->name }}
                             </a>
                         @empty
-                            <span class="text-muted font-italic">Chưa có thẻ tag</span>
+                            <span class="text-muted font-italic">Chua co the tag</span>
                         @endforelse
                     </div>
                 </div>
@@ -200,7 +199,7 @@
 
 <footer class="text-center">
     <div class="container">
-        ©Dontcopyright  , cre by Hoàng
+        ©Dontcopyright  , cre by Hoang
     </div>
 </footer>
 

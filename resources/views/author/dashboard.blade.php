@@ -2,9 +2,16 @@
 
 @section('content')
     <div class="container-fluid" style="padding: 0;">
-        <div class="mb-4">
-            <h2 style="font-weight: 700; text-transform: uppercase; color: #00FF87; border-left: 4px solid #00FF87; padding-left: 15px;">Tổng quan của tôi</h2>
-            <p class="text-muted mt-2">Chào mừng, Tác giả {{ Auth::user()->fullname }}!</p>
+        <div class="d-flex justify-content-between align-items-center mb-4 pb-3" style="border-bottom: 1px solid #2D3748;">
+            <div>
+                <h2 style="font-weight: 700; text-transform: uppercase; color: #00FF87; border-left: 4px solid #00FF87; padding-left: 15px; margin: 0;">Tổng quan của tôi</h2>
+                <p class="text-muted mt-2 mb-0"> Tác giả {{ Auth::user()->fullname }}</p>
+
+            </div>
+
+            <a href="{{ url('/home') }}" class="btn btn-sm" style="background-color: #00F0FF; color: #121824; font-weight: bold; padding: 10px 18px; text-decoration: none; border-radius: 4px; transition: all 0.2s;" onmouseover="this.style.backgroundColor='#00D8E6'" onmouseout="this.style.backgroundColor='#00F0FF'">
+                Xem trang tin tức
+            </a>
         </div>
 
         <div class="row g-3">

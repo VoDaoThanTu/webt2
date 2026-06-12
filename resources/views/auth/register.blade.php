@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đăng ký tài khoản - The Tech Pulse</title>
+    <title>Đăng ký tài khoản</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
@@ -78,7 +78,7 @@
 <body>
 
 <div class="register-box">
-    <div class="register-title">⚡ Tạo tài khoản mới</div>
+    <div class="register-title">Register</div>
 
     @if ($errors->any())
         <div class="alert alert-danger" style="background-color: rgba(239, 68, 68, 0.1); border: 1px solid #EF4444; color: #EF4444; padding: 10px; border-radius: 4px; font-size: 14px; margin-bottom: 20px;">
@@ -94,29 +94,29 @@
         @csrf
 
         <div class="form-group">
-            <label for="fullname">Họ và tên của bạn</label>
-            <input type="text" id="fullname" name="fullname" value="{{ old('fullname') }}" placeholder="Họ tên của bạn" required>
+            <label for="fullname">Fullname</label>
+            <input type="text" id="fullname" name="fullname" value="{{ old('fullname') }}" placeholder="Fullname" required>
         </div>
 
         <div class="form-group">
-            <label for="email">Địa chỉ Email</label>
+            <label for="email">Email</label>
             <input type="email" id="email" name="email" value="{{ old('email') }}" placeholder="name@example.com" required>
         </div>
 
         <div class="form-group">
-            <label for="password">Mật khẩu bảo mật</label>
-            <input type="password" id="password" name="password" placeholder="Tối thiểu 6 ký tự" required>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="max 6 numbers" required>
         </div>
 
         <div class="form-group">
-            <label for="password_confirmation">Xác nhận lại mật khẩu</label>
-            <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Nhập lại mật khẩu" required>
+            <label for="password_confirmation">Re-enter password</label>
+            <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Re-enter password" required>
         </div>
 
-        <button type="submit" class="btn-register">Hoàn tất đăng ký</button>
+        <button type="submit" class="btn-register">Register</button>
 
         <div class="text-center mt-3" style="font-size: 14px;">
-            <a href="{{ url('/login') }}" style="color: #94A3B8; text-decoration: none;">Đăng nhập ngay</a>
+            <a href="{{ url('/login') }}" style="color: #94A3B8; text-decoration: none;">Login</a>
         </div>
     </form>
 </div>

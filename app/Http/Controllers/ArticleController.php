@@ -6,12 +6,48 @@ use App\Models\Article;
 use App\Models\Category;
 use App\Models\User;
 use App\Models\Tag;
+use App\Models\Comment;
+use App\Models\Viewhistory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class ArticleController extends Controller
 {
+    // Hien thi chi tiet bai viet va ghi nhan luot xem vao database
+    public function show($id)
+    {
+        $article = Article::with(['category', 'user', 'tags', 'comments.user', 'comments.replies.user'])->findOrFail($id);
+
+        // Tu dong ghi nhan lich su xem khi nguoi dung click vao bai viet
+        $view = new Viewhistory();
+        $view->article_id = $article->id;
+        $view->user_id = Auth::check() ? Auth::id() : null;
+        $view->save();
+
+        return view('client.detail', compact('article'));
+    }
+
+    // Xu ly gui binh luan moi hoac tra loi (reply) binh luan cu
+    public function comment(Request $request, $id)
+    {
+        $request->validate([
+            'content' => 'required'
+        ]);
+
+        $comment = new Comment();
+        $comment->content = $request->input('content');
+        $comment->article_id = $id;
+        $comment->user_id = Auth::id();
+
+        // Neu co parent_id thi day la mot cau tra loi, nguoc lai thi la null (binh luan goc)
+        $comment->parent_id = $request->input('parent_id', null);
+
+        $comment->save();
+
+        return redirect()->back();
+    }
+
     public function index()
     {
         $articles = Article::with(['category', 'user'])->get();
@@ -101,6 +137,7 @@ class ArticleController extends Controller
 
         return redirect()->back();
     }
+
     public function authorIndex()
     {
         $articles = Article::where('user_id', Auth::id())->with(['category', 'user'])->get();
@@ -158,7 +195,6 @@ class ArticleController extends Controller
 
         return view('articles.edit', compact('article', 'categories', 'tags'));
     }
-
 
     public function authorUpdate(Request $request, $id)
     {

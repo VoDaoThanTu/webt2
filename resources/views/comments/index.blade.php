@@ -1,7 +1,6 @@
 @extends('layouts.master')
 
 <style>
-    /* Khung hộp quản lý nền xanh đen hi-tech phẳng lì */
     .manage-box {
         background-color: #1E2640;
         border: 1px solid #2D3748;
@@ -21,7 +20,6 @@
         letter-spacing: 0.5px;
     }
 
-    /* Nút Xóa dạng khối phẳng tĩnh - Không hiệu ứng mượt rườm rà */
     .btn-action-delete {
         background-color: transparent;
         color: #EF4444;
@@ -37,7 +35,6 @@
         color: #FFFFFF;
     }
 
-    /* CẤU HÌNH BẢNG TỐI PHẲNG CHỐNG ẨN CHỮ */
     .table-custom {
         width: 100%;
         border-collapse: collapse;
@@ -56,7 +53,6 @@
         text-align: left;
     }
 
-    /* Ép ruột bảng sang nền tối của hộp, chữ sáng rõ ràng tương phản tốt */
     .table-custom td {
         background-color: #1E2640;
         color: #E2E8F0;
@@ -75,7 +71,7 @@
 @section('content')
     <div class="manage-box">
         <div class="manage-title">
-            Kiểm duyệt bình luận hệ thống (Quyền Admin)
+            Quản lý bình luận
         </div>
 
         <table class="table-custom">
